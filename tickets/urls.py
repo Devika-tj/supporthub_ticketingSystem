@@ -1,0 +1,34 @@
+from django.urls import path
+
+from . import views
+
+
+app_name = 'tickets'
+
+
+urlpatterns = [
+
+    path(
+        '',
+        views.my_tickets,
+        name='my_tickets'
+    ),
+
+    path(
+        'create/',
+        views.create_ticket,
+        name='create'
+    ),
+
+    path(
+        'request-types/',
+        views.request_types_api,
+        name='request_types'
+    ),
+
+    path(
+        '<int:ticket_no>/',
+        views.ticket_detail,
+        name='detail'
+    ),
+]
