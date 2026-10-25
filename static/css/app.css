@@ -1,0 +1,560 @@
+:root {
+    --blue: #2764e8;
+    --purple: #6259df;
+    --green: #12b886;
+    --ink: #172033;
+    --muted: #687386;
+    --border: #e7eaf0;
+    --bg: #f6f8fc;
+}
+
+
+body {
+    background: var(--bg);
+    color: var(--ink);
+}
+
+
+.support-navbar {
+    background: linear-gradient(
+        100deg,
+        #2764e8,
+        #2748bf
+    );
+
+    min-height: 76px;
+}
+
+
+.support-navbar .nav-link {
+    font-weight: 600;
+}
+
+
+.hero {
+    color: #fff;
+    padding: 46px 0;
+}
+
+
+.hero h1 {
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+
+.hero p {
+    margin: 0;
+    opacity: .9;
+    font-size: 1.05rem;
+}
+
+
+.hero-blue {
+    background: linear-gradient(
+        110deg,
+        #2764e8,
+        #397cf2
+    );
+}
+
+
+.hero-green {
+    background: linear-gradient(
+        110deg,
+        #11ad82,
+        #10b87f
+    );
+}
+
+
+.hero-purple {
+    background: linear-gradient(
+        110deg,
+        #6559df,
+        #5148e7
+    );
+}
+
+
+.login-page {
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 30px 20px;
+}
+
+
+.login-card {
+    max-width: 1100px;
+
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1.35fr;
+
+    background: #fff;
+
+    border-radius: 22px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 60px
+        rgba(32,50,90,.12);
+}
+
+
+.login-welcome {
+    color: #fff;
+
+    padding: 70px 55px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #6876e7,
+            #7955c7
+        );
+}
+
+
+.login-welcome h1 {
+    font-size: 3rem;
+
+    font-weight: 800;
+}
+
+
+.login-welcome p {
+    font-size: 1.15rem;
+
+    line-height: 1.8;
+}
+
+
+.login-welcome li {
+    margin: 22px 0;
+
+    font-size: 1.05rem;
+}
+
+
+.login-form {
+    padding: 70px 60px;
+}
+
+
+.login-form h2 {
+    text-align: center;
+
+    font-size: 2.3rem;
+
+    font-weight: 800;
+}
+
+
+.btn-primary {
+    background:
+        linear-gradient(
+            100deg,
+            #3978eb,
+            #714ac5
+        );
+
+    border: 0;
+
+    color: #fff;
+}
+
+
+.btn-primary:hover {
+    color: #fff;
+
+    filter: brightness(.96);
+}
+
+
+.filter-card,
+.form-card,
+.detail-card,
+.profile-card,
+.stat-card {
+
+    background: #fff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 8px 28px
+        rgba(20,35,70,.05);
+}
+
+
+.filter-card {
+    padding: 20px;
+}
+
+
+.form-card,
+.detail-card,
+.profile-card {
+    padding: 30px;
+}
+
+
+.narrow-card {
+    max-width: 650px;
+
+    margin: auto;
+}
+
+
+.status-filter {
+    width: 100%;
+
+    min-height: 72px;
+
+    background: #fff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    font-weight: 700;
+
+    padding: 10px;
+}
+
+
+.status-filter.active {
+    background: #2e6ce8;
+
+    color: #fff;
+}
+
+
+.ticket-card {
+    background: #fff;
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    padding: 28px;
+
+    margin-bottom: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    box-shadow:
+        0 7px 24px
+        rgba(20,35,70,.05);
+}
+
+
+.ticket-card h3 {
+    margin: 9px 0 16px;
+
+    font-size: 1.15rem;
+}
+
+
+.ticket-no,
+.muted-label,
+.help-text,
+.created-time {
+    color: var(--muted);
+
+    font-size: .9rem;
+}
+
+
+.ticket-meta {
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+}
+
+
+.created-time {
+    margin-top: 24px;
+}
+
+
+.badge {
+    padding: 8px 12px;
+
+    border-radius: 7px;
+}
+
+
+.status-open {
+    background: #fff0cf;
+
+    color: #9a5d00;
+}
+
+
+.status-in_progress {
+    background: #e6edff;
+
+    color: #3054ad;
+}
+
+
+.status-resolved {
+    background: #d9f8ed;
+
+    color: #0a9469;
+}
+
+
+.priority-high {
+    background: #ffe1e1;
+
+    color: #a42828;
+}
+
+
+.priority-medium {
+    background: #fff0bd;
+
+    color: #805d00;
+}
+
+
+.priority-low {
+    background: #e7edf5;
+
+    color: #536176;
+}
+
+
+.empty-card {
+    text-align: center;
+
+    background: #fff;
+
+    padding: 60px 20px;
+
+    border-radius: 18px;
+}
+
+
+.form-label {
+    font-weight: 700;
+}
+
+
+.help-text {
+    margin-top: 6px;
+}
+
+
+.form-control,
+.form-select {
+    min-height: 48px;
+
+    border-radius: 10px;
+
+    border-color: #dce1ea;
+}
+
+
+.ticket-hero-no {
+    font-size: 1.3rem;
+
+    font-weight: 800;
+}
+
+
+.hero-pill {
+    background:
+        rgba(255,255,255,.16);
+
+    border:
+        1px solid
+        rgba(255,255,255,.35);
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+}
+
+
+.detail-card h3,
+.profile-card h3 {
+    font-weight: 800;
+}
+
+
+.detail-card p strong {
+    display: block;
+
+    margin-top: 4px;
+}
+
+
+.muted-label {
+    display: block;
+
+    margin-top: 14px;
+}
+
+
+.timeline-item {
+    border-left:
+        3px solid #3980e8;
+
+    padding: 12px 18px;
+
+    margin-bottom: 15px;
+
+    background: #fafcff;
+
+    border-radius:
+        0 10px 10px 0;
+}
+
+
+.timeline-item small {
+    float: right;
+
+    color: var(--muted);
+}
+
+
+.profile-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 25px;
+}
+
+
+.profile-row {
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 18px 0;
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+
+.profile-row span {
+    color: var(--muted);
+}
+
+
+.role-badge,
+.status-pill {
+    background: #18b985;
+
+    color: #fff;
+
+    padding: 7px 12px;
+
+    border-radius: 8px;
+}
+
+
+.stat-card {
+    padding: 25px;
+}
+
+
+.stat-card span {
+    display: block;
+
+    color: var(--muted);
+}
+
+
+.stat-card strong {
+    display: block;
+
+    font-size: 2rem;
+
+    margin-top: 5px;
+}
+
+
+@media(max-width:800px) {
+
+    .login-card,
+    .profile-grid {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .login-welcome {
+
+        padding: 40px 30px;
+
+    }
+
+
+    .login-form {
+
+        padding: 40px 30px;
+
+    }
+
+
+    .ticket-card {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+
+    .support-navbar .container {
+
+        flex-wrap: wrap;
+
+        padding: 12px;
+
+    }
+
+
+    .support-navbar .ms-auto {
+
+        flex-wrap: wrap;
+
+    }
+
+}

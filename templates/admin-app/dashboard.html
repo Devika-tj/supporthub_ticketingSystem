@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Admin Dashboard - SupportHub
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="hero hero-blue">
+
+    <div class="container">
+
+        <h1>
+            Admin Dashboard
+        </h1>
+
+        <p>
+            Manage SupportHub accounts and configuration
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="container py-5">
+
+
+    <div class="row g-4">
+
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <span>
+                    Total Users
+                </span>
+
+                <strong>
+                    {{ total_users }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <span>
+                    Staff
+                </span>
+
+                <strong>
+                    {{ staff_count }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <span>
+                    Support Staff
+                </span>
+
+                <strong>
+                    {{ support_count }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="d-flex gap-2 mt-4">
+
+
+        <a
+            href="{% url 'admin_app:create_user' %}"
+            class="btn btn-primary"
+        >
+            ⊕ Create Staff / Support Account
+        </a>
+
+
+        <a
+            href="{% url 'admin_app:users' %}"
+            class="btn btn-outline-primary"
+        >
+            View Users
+        </a>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}
