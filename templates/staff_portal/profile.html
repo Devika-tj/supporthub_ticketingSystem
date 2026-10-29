@@ -1,0 +1,190 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+My Profile - SupportHub
+{% endblock %}
+
+
+{% block content %}
+
+
+<div class="container py-5">
+
+
+    <div class="profile-grid">
+
+
+        <div class="profile-card">
+
+
+            <h3>
+                ▣ Personal Information
+            </h3>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ♙ Username
+                </span>
+
+                <strong>
+                    {{ user.username }}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ✉ Email
+                </span>
+
+                <strong>
+                    {{ user.email|default:'Not provided' }}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ▣ Full Name
+                </span>
+
+                <strong>
+                    {{ user.full_name|default:'Not provided' }}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ♢ Role
+                </span>
+
+                <strong class="role-badge">
+                    {{ user.get_role_display }}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ☎ Phone
+                </span>
+
+                <strong>
+                    {{ user.phone|default:'Not provided' }}
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="profile-card">
+
+
+            <h3>
+                ⓘ Account Details
+            </h3>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ▣ Joined
+                </span>
+
+                <strong>
+                    {{ user.date_joined|date:'F d, Y' }}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ◷ Last Login
+                </span>
+
+                <strong>
+                    {{ user.last_login|date:'F d, Y H:i'|default:'—' }}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ✓ Account Status
+                </span>
+
+                <strong class="status-pill">
+
+                    {% if user.is_active %}
+                        Active
+                    {% else %}
+                        Inactive
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ✉ Email Verified
+                </span>
+
+                <strong class="status-pill">
+
+                    {% if user.email_verified %}
+                        Verified
+                    {% else %}
+                        Not Verified
+                    {% endif %}
+
+                </strong>
+
+            </div>
+
+
+            <div class="profile-row">
+
+                <span>
+                    ⚿ Password
+                </span>
+
+
+                <a
+                    href="{% url 'staff_portal:change_password' %}"
+                    class="btn btn-outline-primary btn-sm"
+                >
+                    Change Password
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

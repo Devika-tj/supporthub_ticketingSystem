@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Support Staff Dashboard - SupportHub
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="hero hero-blue">
+
+    <div class="container">
+
+        <h1>
+            Support Staff Dashboard
+        </h1>
+
+        <p>
+            Ticket overview — detailed support workflow can be added from your requirements.
+        </p>
+
+    </div>
+
+</section>
+
+
+<div class="container py-5">
+
+
+    <div class="row g-4">
+
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <span>
+                    Open
+                </span>
+
+                <strong>
+                    {{ open_count }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <span>
+                    In Progress
+                </span>
+
+                <strong>
+                    {{ progress_count }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+        <div class="col-md-4">
+
+            <div class="stat-card">
+
+                <span>
+                    Resolved
+                </span>
+
+                <strong>
+                    {{ resolved_count }}
+                </strong>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="detail-card mt-4">
+
+
+        <h3>
+            Recent Tickets
+        </h3>
+
+
+        <div class="table-responsive">
+
+
+            <table class="table">
+
+
+                <tr>
+
+                    <th>
+                        Ticket
+                    </th>
+
+                    <th>
+                        Title
+                    </th>
+
+                    <th>
+                        Department
+                    </th>
+
+                    <th>
+                        Status
+                    </th>
+
+                    <th>
+                        Created By
+                    </th>
+
+                </tr>
+
+
+                {% for t in tickets %}
+
+
+                <tr>
+
+                    <td>
+                        #{{ t.ticket_no }}
+                    </td>
+
+                    <td>
+                        {{ t.title }}
+                    </td>
+
+                    <td>
+                        {{ t.department.name }}
+                    </td>
+
+                    <td>
+                        {{ t.get_status_display }}
+                    </td>
+
+                    <td>
+                        {{ t.created_by.username }}
+                    </td>
+
+                </tr>
+
+
+                {% empty %}
+
+
+                <tr>
+
+                    <td colspan="5">
+                        No tickets.
+                    </td>
+
+                </tr>
+
+
+                {% endfor %}
+
+
+            </table>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,228 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+My Tickets - SupportHub
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="hero hero-blue">
+
+    <div class="container">
+
+        <div
+            class="d-flex justify-content-between align-items-center"
+        >
+
+            <div>
+
+                <h1>
+                    ▱ My Tickets
+                </h1>
+
+                <p>
+                    Manage and track all your support requests
+                </p>
+
+            </div>
+
+
+            <a
+                href="{% url 'tickets:create' %}"
+                class="btn btn-light btn-lg"
+            >
+                ⊕ New Ticket
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<div class="container py-5">
+
+
+    <div class="filter-card mb-4">
+
+        <form class="row g-3 align-items-center">
+
+
+            <div class="col-lg-6">
+
+                <input
+                    name="q"
+                    value="{{ query }}"
+                    class="form-control"
+                    placeholder="⌕ Search tickets..."
+                >
+
+            </div>
+
+
+            <div class="col">
+
+                <a
+                    class="status-filter d-block text-center text-decoration-none
+                    {% if active_status == 'all' %}active{% endif %}"
+                    href="?status=all&q={{ query }}"
+                >
+                    ▦
+                    <br>
+                    All
+                </a>
+
+            </div>
+
+
+            <div class="col">
+
+                <a
+                    class="status-filter d-block text-center text-decoration-none
+                    {% if active_status == 'open' %}active{% endif %}"
+                    href="?status=open&q={{ query }}"
+                >
+                    ●
+                    <br>
+                    Open
+                </a>
+
+            </div>
+
+
+            <div class="col">
+
+                <a
+                    class="status-filter d-block text-center text-decoration-none
+                    {% if active_status == 'in_progress' %}active{% endif %}"
+                    href="?status=in_progress&q={{ query }}"
+                >
+                    ⟳
+                    <br>
+                    In Progress
+                </a>
+
+            </div>
+
+
+            <div class="col">
+
+                <a
+                    class="status-filter d-block text-center text-decoration-none
+                    {% if active_status == 'resolved' %}active{% endif %}"
+                    href="?status=resolved&q={{ query }}"
+                >
+                    ✓
+                    <br>
+                    Resolved
+                </a>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+    {% for ticket in tickets %}
+
+
+    <div class="ticket-card">
+
+
+        <div>
+
+
+            <div class="ticket-no">
+                # TICKET-{{ ticket.ticket_no }}
+            </div>
+
+
+            <h3>
+                {{ ticket.title }}
+            </h3>
+
+
+            <div class="ticket-meta">
+
+
+                <span
+                    class="badge status-{{ ticket.status }}"
+                >
+                    ● {{ ticket.get_status_display }}
+                </span>
+
+
+                <span
+                    class="badge priority-{{ ticket.priority }}"
+                >
+                    ● {{ ticket.get_priority_display }}
+                    Priority
+                </span>
+
+
+                <span>
+                    ▱ {{ ticket.department.name }}
+                </span>
+
+
+            </div>
+
+
+            <div class="created-time">
+
+                ◷ Created
+                {{ ticket.created_at|timesince }}
+                ago
+
+            </div>
+
+
+        </div>
+
+
+        <a
+            href="{% url 'tickets:detail' ticket.ticket_no %}"
+            class="btn btn-primary"
+        >
+            View Details →
+        </a>
+
+
+    </div>
+
+
+    {% empty %}
+
+
+    <div class="empty-card">
+
+        <h4>
+            No tickets found
+        </h4>
+
+        <p class="text-muted">
+            Create your first support ticket.
+        </p>
+
+        <a
+            class="btn btn-primary"
+            href="{% url 'tickets:create' %}"
+        >
+            Create Ticket
+        </a>
+
+    </div>
+
+
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}

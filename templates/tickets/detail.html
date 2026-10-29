@@ -1,0 +1,371 @@
+{% extends 'base.html' %}
+
+
+{% block title %}
+Ticket {{ ticket.ticket_no }} - SupportHub
+{% endblock %}
+
+
+{% block content %}
+
+
+<section class="hero hero-purple">
+
+    <div class="container">
+
+
+        <div class="ticket-hero-no">
+
+            # TICKET-{{ ticket.ticket_no }}
+
+        </div>
+
+
+        <h1 class="mt-2">
+
+            {{ ticket.title }}
+
+        </h1>
+
+
+        <div class="ticket-meta mt-3">
+
+
+            <span class="hero-pill">
+
+                ● {{ ticket.get_status_display }}
+
+            </span>
+
+
+            <span class="hero-pill">
+
+                ● {{ ticket.get_priority_display }}
+                Priority
+
+            </span>
+
+
+            <span class="hero-pill">
+
+                ▱ {{ ticket.department.name }}
+
+            </span>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<div class="container py-5">
+
+
+    <div class="row g-4">
+
+
+        <div class="col-lg-8">
+
+
+            <div class="detail-card mb-4">
+
+
+                <h3>
+                    ▤ Ticket Details
+                </h3>
+
+
+                <hr>
+
+
+                <p class="fs-5">
+
+                    {{ ticket.remarks|linebreaksbr|default:'No remarks provided.' }}
+
+                </p>
+
+
+                {% if ticket.other_request %}
+
+                <h6>
+                    Other Request
+                </h6>
+
+                <p>
+                    {{ ticket.other_request }}
+                </p>
+
+                {% endif %}
+
+
+                {% if ticket.attachments.all %}
+
+                <h5 class="mt-4">
+                    Attachments
+                </h5>
+
+
+                <ul>
+
+                    {% for a in ticket.attachments.all %}
+
+                    <li>
+
+                        <a
+                            href="{{ a.file.url }}"
+                            target="_blank"
+                        >
+                            {{ a.file.name|cut:'ticket_attachments/' }}
+                        </a>
+
+                    </li>
+
+                    {% endfor %}
+
+                </ul>
+
+                {% endif %}
+
+
+            </div>
+
+
+            <div class="detail-card">
+
+
+                <h3>
+                    ◌ Activity & Comments
+                </h3>
+
+
+                <hr>
+
+
+                <div class="timeline-item">
+
+                    <strong>
+                        {{ ticket.created_by.username }}
+                    </strong>
+
+
+                    <small>
+                        {{ ticket.created_at|timesince }}
+                        ago
+                    </small>
+
+
+                    <p class="mb-0 mt-2">
+                        Created this ticket
+                    </p>
+
+                </div>
+
+
+                {% for c in ticket.comments.all %}
+
+                <div class="timeline-item">
+
+                    <strong>
+                        {{ c.author.username }}
+                    </strong>
+
+
+                    <small>
+                        {{ c.created_at|timesince }}
+                        ago
+                    </small>
+
+
+                    <p class="mb-0 mt-2">
+
+                        {{ c.comment|linebreaksbr }}
+
+                    </p>
+
+                </div>
+
+
+                {% empty %}
+
+                <p class="text-muted">
+                    No comments yet.
+                </p>
+
+                {% endfor %}
+
+
+                <form
+                    method="post"
+                    class="mt-4"
+                >
+
+                    {% csrf_token %}
+
+
+                    <label class="form-label">
+
+                        ⊕ Add Comment
+
+                    </label>
+
+
+                    {{ comment_form.comment }}
+
+
+                    <button
+                        class="btn btn-primary mt-3"
+                    >
+                        ➤ Post Comment
+                    </button>
+
+
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+
+        <div class="col-lg-4">
+
+
+            <div class="detail-card">
+
+
+                <h3>
+                    ⓘ Ticket Information
+                </h3>
+
+
+                <hr>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Status
+                    </span>
+
+                    <strong>
+                        {{ ticket.get_status_display }}
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Priority
+                    </span>
+
+                    <strong>
+                        {{ ticket.get_priority_display }}
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Department
+                    </span>
+
+                    <strong>
+                        {{ ticket.department.name }}
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Request
+                    </span>
+
+                    <strong>
+                        {{ ticket.request_type.name }}
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Created By
+                    </span>
+
+                    <strong>
+                        {{ ticket.created_by.username }}
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Assigned To
+                    </span>
+
+                    <strong>
+                        {{ ticket.assigned_to.username|default:'Unassigned' }}
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Created
+                    </span>
+
+                    <strong>
+                        {{ ticket.created_at|date:'M d, Y H:i' }}
+                    </strong>
+
+                </p>
+
+
+                <p>
+
+                    <span class="muted-label">
+                        Last Updated
+                    </span>
+
+                    <strong>
+                        {{ ticket.updated_at|timesince }}
+                        ago
+                    </strong>
+
+                </p>
+
+
+            </div>
+
+
+            <a
+                href="{% url 'tickets:my_tickets' %}"
+                class="btn btn-outline-primary w-100 mt-3"
+            >
+                ☰ Back to My Tickets
+            </a>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}
