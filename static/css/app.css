@@ -23,11 +23,25 @@ body {
     );
 
     min-height: 76px;
+    vertical-align: -0.125em;
+    
 }
 
 
 .support-navbar .nav-link {
     font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.support-navbar .ms-auto {
+    gap: 15px; 
+}
+
+
+.support-navbar form {
+    margin-left: 10px;
 }
 
 

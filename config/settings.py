@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'support_staff',
     'staff_portal',
     'tickets',
-    'admin_panel'
+    'admin_panel',
     
 ]
 

@@ -77,7 +77,7 @@ def dashboard(request):
 
     return render(
         request,
-        'admin_app/dashboard.html',
+        'admin_panel/dashboard.html',
         context
     )
 
@@ -105,7 +105,7 @@ def create_user(request):
 
 
             return redirect(
-                'admin_app:users'
+                'admin_panel:users'
             )
 
 
@@ -116,7 +116,7 @@ def create_user(request):
 
     return render(
         request,
-        'admin_app/create_user.html',
+        'admin_panel/create_user.html',
         {
             'form': form
         }
@@ -128,7 +128,7 @@ def users(request):
 
     return render(
         request,
-        'admin_app/users.html',
+        'admin_panel/users.html',
         {
             'users':
                 User.objects

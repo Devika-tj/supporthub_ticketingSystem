@@ -2,59 +2,24 @@
 
 
 {% block title %}
-Ticket {{ ticket.ticket_no }} - SupportHub
+Create Ticket - SupportHub
 {% endblock %}
 
 
 {% block content %}
 
 
-<section class="hero hero-purple">
+<section class="hero hero-green">
 
     <div class="container">
 
-
-        <div class="ticket-hero-no">
-
-            # TICKET-{{ ticket.ticket_no }}
-
-        </div>
-
-
-        <h1 class="mt-2">
-
-            {{ ticket.title }}
-
+        <h1>
+            ⊕ Create New Ticket
         </h1>
 
-
-        <div class="ticket-meta mt-3">
-
-
-            <span class="hero-pill">
-
-                ● {{ ticket.get_status_display }}
-
-            </span>
-
-
-            <span class="hero-pill">
-
-                ● {{ ticket.get_priority_display }}
-                Priority
-
-            </span>
-
-
-            <span class="hero-pill">
-
-                ▱ {{ ticket.department.name }}
-
-            </span>
-
-
-        </div>
-
+        <p>
+            Describe your issue and we'll help you resolve it
+        </p>
 
     </div>
 
@@ -64,308 +29,249 @@ Ticket {{ ticket.ticket_no }} - SupportHub
 <div class="container py-5">
 
 
-    <div class="row g-4">
+    <div class="form-card">
 
 
-        <div class="col-lg-8">
+        <h3>
+            ⓘ Basic Information
+        </h3>
+
+        <hr>
 
 
-            <div class="detail-card mb-4">
+        <form
+            method="post"
+            enctype="multipart/form-data"
+        >
+
+            {% csrf_token %}
 
 
-                <h3>
-                    ▤ Ticket Details
-                </h3>
+            {% if form.non_field_errors %}
+
+            <div class="alert alert-danger">
+
+                {{ form.non_field_errors }}
+
+            </div>
+
+            {% endif %}
 
 
-                <hr>
+            <div class="mb-4">
 
+                <label class="form-label">
+                    Subject *
+                </label>
 
-                <p class="fs-5">
+                {{ form.title }}
 
-                    {{ ticket.remarks|linebreaksbr|default:'No remarks provided.' }}
+                {{ form.title.errors }}
 
-                </p>
-
-
-                {% if ticket.other_request %}
-
-                <h6>
-                    Other Request
-                </h6>
-
-                <p>
-                    {{ ticket.other_request }}
-                </p>
-
-                {% endif %}
-
-
-                {% if ticket.attachments.all %}
-
-                <h5 class="mt-4">
-                    Attachments
-                </h5>
-
-
-                <ul>
-
-                    {% for a in ticket.attachments.all %}
-
-                    <li>
-
-                        <a
-                            href="{{ a.file.url }}"
-                            target="_blank"
-                        >
-                            {{ a.file.name|cut:'ticket_attachments/' }}
-                        </a>
-
-                    </li>
-
-                    {% endfor %}
-
-                </ul>
-
-                {% endif %}
-
+                <div class="help-text">
+                    Enter a clear, concise subject line
+                </div>
 
             </div>
 
 
-            <div class="detail-card">
+            <div class="row g-4">
 
 
-                <h3>
-                    ◌ Activity & Comments
-                </h3>
-
-
-                <hr>
-
-
-                <div class="timeline-item">
-
-                    <strong>
-                        {{ ticket.created_by.username }}
-                    </strong>
-
-
-                    <small>
-                        {{ ticket.created_at|timesince }}
-                        ago
-                    </small>
-
-
-                    <p class="mb-0 mt-2">
-                        Created this ticket
-                    </p>
-
-                </div>
-
-
-                {% for c in ticket.comments.all %}
-
-                <div class="timeline-item">
-
-                    <strong>
-                        {{ c.author.username }}
-                    </strong>
-
-
-                    <small>
-                        {{ c.created_at|timesince }}
-                        ago
-                    </small>
-
-
-                    <p class="mb-0 mt-2">
-
-                        {{ c.comment|linebreaksbr }}
-
-                    </p>
-
-                </div>
-
-
-                {% empty %}
-
-                <p class="text-muted">
-                    No comments yet.
-                </p>
-
-                {% endfor %}
-
-
-                <form
-                    method="post"
-                    class="mt-4"
-                >
-
-                    {% csrf_token %}
-
+                <div class="col-md-6">
 
                     <label class="form-label">
-
-                        ⊕ Add Comment
-
+                        Department *
                     </label>
 
+                    {{ form.department }}
 
-                    {{ comment_form.comment }}
+                    {{ form.department.errors }}
 
-
-                    <button
-                        class="btn btn-primary mt-3"
-                    >
-                        ➤ Post Comment
-                    </button>
+                </div>
 
 
-                </form>
+                <div class="col-md-6">
 
+                    <label class="form-label">
+                        Request *
+                    </label>
 
-            </div>
+                    {{ form.request_type }}
 
+                    {{ form.request_type.errors }}
 
-        </div>
-
-
-        <div class="col-lg-4">
-
-
-            <div class="detail-card">
-
-
-                <h3>
-                    ⓘ Ticket Information
-                </h3>
-
-
-                <hr>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Status
-                    </span>
-
-                    <strong>
-                        {{ ticket.get_status_display }}
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Priority
-                    </span>
-
-                    <strong>
-                        {{ ticket.get_priority_display }}
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Department
-                    </span>
-
-                    <strong>
-                        {{ ticket.department.name }}
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Request
-                    </span>
-
-                    <strong>
-                        {{ ticket.request_type.name }}
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Created By
-                    </span>
-
-                    <strong>
-                        {{ ticket.created_by.username }}
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Assigned To
-                    </span>
-
-                    <strong>
-                        {{ ticket.assigned_to.username|default:'Unassigned' }}
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Created
-                    </span>
-
-                    <strong>
-                        {{ ticket.created_at|date:'M d, Y H:i' }}
-                    </strong>
-
-                </p>
-
-
-                <p>
-
-                    <span class="muted-label">
-                        Last Updated
-                    </span>
-
-                    <strong>
-                        {{ ticket.updated_at|timesince }}
-                        ago
-                    </strong>
-
-                </p>
+                </div>
 
 
             </div>
 
 
-            <a
-                href="{% url 'tickets:my_tickets' %}"
-                class="btn btn-outline-primary w-100 mt-3"
+            <div
+                id="other-box"
+                class="mb-4 mt-4"
             >
-                ☰ Back to My Tickets
-            </a>
+
+                <label class="form-label">
+                    If Other, specify the request
+                </label>
+
+                {{ form.other_request }}
+
+                {{ form.other_request.errors }}
+
+            </div>
 
 
-        </div>
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Attach Documents
+                </label>
+
+                {{ form.attachments }}
+
+                <div class="help-text">
+                    You can select multiple documents.
+                </div>
+
+            </div>
+
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Remarks
+                </label>
+
+                {{ form.remarks }}
+
+                {{ form.remarks.errors }}
+
+            </div>
+
+
+            <button
+                class="btn btn-primary btn-lg px-5"
+            >
+                Submit Ticket
+            </button>
+
+
+        </form>
 
 
     </div>
 
 </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+
+const dep =
+    document.getElementById(
+        'id_department'
+    );
+
+
+const req =
+    document.getElementById(
+        'id_request_type'
+    );
+
+
+const other =
+    document.getElementById(
+        'other-box'
+    );
+
+
+function toggleOther() {
+
+    const opt =
+        req.options[
+            req.selectedIndex
+        ];
+
+
+    other.style.display =
+        opt &&
+        opt.text.toLowerCase() === 'other'
+            ? 'block'
+            : 'none';
+}
+
+
+async function loadRequests() {
+
+    req.innerHTML =
+        '<option value="">Select request</option>';
+
+
+    if (!dep.value) {
+
+        toggleOther();
+
+        return;
+    }
+
+
+    const r =
+        await fetch(
+            '{% url "tickets:request_types" %}?department='
+            + dep.value
+        );
+
+
+    const data =
+        await r.json();
+
+
+    data.forEach(
+        x => {
+
+            const o =
+                document.createElement(
+                    'option'
+                );
+
+
+            o.value =
+                x.id;
+
+
+            o.textContent =
+                x.name;
+
+
+            req.appendChild(o);
+
+        }
+    );
+
+
+    toggleOther();
+}
+
+
+dep.addEventListener(
+    'change',
+    loadRequests
+);
+
+
+req.addEventListener(
+    'change',
+    toggleOther
+);
+
+
+toggleOther();
+
+</script>
 
 {% endblock %}
